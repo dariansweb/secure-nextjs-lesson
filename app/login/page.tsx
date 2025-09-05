@@ -6,15 +6,12 @@ import { redirect } from "next/navigation";
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams?:
-    | Record<string, string | string[] | undefined>
-    | Promise<Record<string, string | string[] | undefined>>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  // Next 15: searchParams may be thenable; await it
+
   const sp = (await searchParams) ?? {};
   const rawErr = Array.isArray(sp.err) ? sp.err[0] : sp.err;
 
-  // Read existing CSRF cookie (do NOT set cookies in a Page)
   const csrf = (await cookies()).get("__Host-csrf")?.value ?? "";
 
   // If missing, bounce through the route handler that sets it
