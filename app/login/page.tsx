@@ -8,7 +8,6 @@ export default async function LoginPage({
 }: {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
-
   const sp = (await searchParams) ?? {};
   const rawErr = Array.isArray(sp.err) ? sp.err[0] : sp.err;
 
@@ -46,42 +45,41 @@ export default async function LoginPage({
           {message}
         </p>
       )}
-
-      <form method="POST" action="/api/login">
-        {/* CSRF double-submit: value comes from cookie set by /api/csrf */}
+      <form method="POST" action="/api/login" className="stack">
         <input type="hidden" name="csrf" value={csrf} />
 
-        <label htmlFor="password" style={{ display: "block", fontWeight: 600 }}>
-          Password
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="enter the secret"
-          required
-          style={{
-            width: "100%",
-            marginTop: 6,
-            marginBottom: 16,
-            padding: "0.6rem 0.75rem",
-            borderRadius: 8,
-            border: "1px solid #e5e7eb",
-          }}
-        />
+        <div className="field">
+          <label htmlFor="username" className="label">
+            Username
+          </label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            className="input"
+            autoComplete="username"
+            required
+          />
+        </div>
 
-        <button
-          type="submit"
-          style={{
-            display: "inline-block",
-            padding: "0.6rem 0.9rem",
-            borderRadius: 8,
-            border: "1px solid #111827",
-            background: "white",
-            cursor: "pointer",
-            fontWeight: 600,
-          }}
-        >
+        <div className="field">
+          <label htmlFor="password" className="label">
+            Password
+          </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            className="input"
+            autoComplete="current-password"
+            required
+          />
+          <p className="helper">
+            Use the admin account we seeded for lesson-2.
+          </p>
+        </div>
+
+        <button type="submit" className="btn btn-primary">
           Login
         </button>
       </form>

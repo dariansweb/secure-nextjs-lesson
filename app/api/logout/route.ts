@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const res = NextResponse.redirect(new URL("/api/csrf", req.url)); // go mint fresh CSRF then /login
+  const res = NextResponse.redirect(new URL("/api/csrf", req.url), 303);
   res.cookies.set({
     name: "__Host-session",
     value: "",

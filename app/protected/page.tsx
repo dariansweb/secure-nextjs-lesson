@@ -1,56 +1,67 @@
+// app/protected/page.tsx
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { jwtVerify } from "jose";
-import { logoutAction } from "./actions";
 
 const secret = new TextEncoder().encode(
   process.env.SESSION_SECRET ?? "dev-secret"
 );
+const SESSION_VERSION = parseInt(process.env.SESSION_VERSION ?? "1", 10);
 
-async function verify(token: string | undefined) {
-  if (!token) return null;
-  try {
-    const { payload } = await jwtVerify(token, secret);
-    return payload;
-  } catch {
-    return null;
-  }
-}
+export const dynamic = "force-dynamic";
 
 export default async function ProtectedPage() {
-  const token = (await cookies()).get("__Host-session")?.value;
-  const payload = await verify(token);
+  const cookieStore = await cookies();
+  const token = cookieStore.get("__Host-session")?.value;
+  if (!token) redirect("/login?err=NEED_LOGIN");
 
-  if (!payload) {
-    redirect("/login?error=" + encodeURIComponent("Please log in."));
+  try {
+    const { payload } = await jwtVerify(token, secret, {
+      algorithms: ["HS256"],
+    });
+    if (payload.v !== SESSION_VERSION) throw new Error("stale");
+
+    const username = payload.username as string;
+    const role = payload.role as string;
+
+    return (
+      <main className="container">
+        <section className="card">
+          <header className="header">
+            <h1 className="title">Protected</h1>
+            <span className="badge">{role}</span>
+          </header>
+
+          <p className="muted">
+            Welcome back, <strong>{username}</strong>.
+          </p>
+
+          <div className="divider" />
+
+          <dl className="kv">
+            <dt>User</dt>
+            <dd>{username}</dd>
+
+            <dt>Role</dt>
+            <dd>
+              <span className="badge">{role}</span>
+            </dd>
+
+            {/* Add more claims if you start including them in the JWT */}
+            {/* <dt>User ID</dt><dd>{payload.sub as string}</dd> */}
+          </dl>
+
+          <div className="toolbar">
+            <form method="POST" action="/api/logout">
+              <button type="submit" className="btn">
+                Logout
+              </button>
+            </form>
+          </div>
+        </section>
+      </main>
+    );
+  } catch {
+    redirect("/login?err=NEED_LOGIN");
   }
-
-  return (
-    <main style={{ maxWidth: 700, margin: "4rem auto", padding: "0 1rem" }}>
-      <h1 style={{ fontSize: "1.8rem", fontWeight: 700, marginBottom: "1rem" }}>
-        Protected Resource
-      </h1>
-      <p style={{ marginBottom: "1.25rem" }}>
-        You’re inside, fair and square. This time the cookie is signed, so you
-        can’t fake it with DevTools
-      </p>
-
-      <form method="POST" action={logoutAction}>
-        <button
-          type="submit"
-          style={{
-            display: "inline-block",
-            padding: "0.6rem 0.9rem",
-            borderRadius: 8,
-            border: "1px solid #111827",
-            background: "white",
-            cursor: "pointer",
-            fontWeight: 600,
-          }}
-        >
-          Logout
-        </button>
-      </form>
-    </main>
-  );
 }

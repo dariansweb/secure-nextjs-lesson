@@ -34,7 +34,7 @@
     ".next/types/**/*.ts",
     "next-env.d.ts",
     "build/types/**/*.ts"
-  ],
+, "scripts/hash-password.mjs"  ],
   "exclude": [
     "node_modules"
   ]
