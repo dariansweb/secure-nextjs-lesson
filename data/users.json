@@ -4,5 +4,11 @@
     "username": "admin",
     "role": "admin",
     "passwordHash": "$2b$12$3adn6rd8DiH6xS5OL8ni6.TBE2RV0.eKY0wfaLECA.gqCJpYv00va"
+  },
+    {
+    "id": "u2",
+    "username": "reader",
+    "role": "user",
+    "passwordHash": "$2b$12$5YgWLfKZ5tKQswhXcdA6vuzEKyApdptlA/OkMFp/F3M2Hwn0w8zh."
   }
 ]
