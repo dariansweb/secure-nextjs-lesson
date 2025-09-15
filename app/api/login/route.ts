@@ -4,10 +4,13 @@ import { SignJWT } from "jose";
 import { findUserByUsername, verifyUserPassword } from "@/lib/users";
 import { checkCsrf } from "@/lib/csrf";
 import { loginRateLimit } from "@/lib/rateLimit";
+import { getUserVersion } from "@/lib/userVersion";
 
 export const runtime = "nodejs"; // bcrypt + most DB clients need Node runtime
 
-const secret = new TextEncoder().encode(process.env.SESSION_SECRET ?? "dev-secret");
+const secret = new TextEncoder().encode(
+  process.env.SESSION_SECRET ?? "dev-secret"
+);
 const SESSION_VERSION = parseInt(process.env.SESSION_VERSION ?? "1", 10);
 
 // PRG helper (Post→Redirect→Get)
@@ -39,7 +42,9 @@ export async function POST(req: NextRequest) {
     const rl = await loginRateLimit.limit(ipFrom(req));
     if (!rl.success) {
       await sleep(rand(150, 450));
-      return new NextResponse("Too many attempts. Try again soon.", { status: 429 });
+      return new NextResponse("Too many attempts. Try again soon.", {
+        status: 429,
+      });
     }
 
     // 1) Origin check — belt over suspenders
@@ -74,11 +79,14 @@ export async function POST(req: NextRequest) {
     }
 
     // 5) ✅ Identity: mint JWT and set session cookie
+    const uv = await getUserVersion(user!.id);
+
     const token = await new SignJWT({
       sub: user!.id,
       username: user!.username,
       role: user!.role,
-      v: SESSION_VERSION,
+      v: SESSION_VERSION, // global version
+      uv, // per-user version  👈 NEW  (( Lesson 4 step 2 ))
     })
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()

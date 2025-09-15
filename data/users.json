@@ -5,10 +5,22 @@
     "role": "admin",
     "passwordHash": "$2b$12$3adn6rd8DiH6xS5OL8ni6.TBE2RV0.eKY0wfaLECA.gqCJpYv00va"
   },
-    {
+  {
     "id": "u2",
     "username": "reader",
     "role": "user",
     "passwordHash": "$2b$12$5YgWLfKZ5tKQswhXcdA6vuzEKyApdptlA/OkMFp/F3M2Hwn0w8zh."
+  },
+  {
+    "id": "606f06dd-881b-4a67-9899-a2cb6a6cd205",
+    "username": "alice",
+    "role": "user",
+    "passwordHash": "$2b$12$x/2qHHfWYLGqWe/4rwbgsOrQHgNTwE4wIoHcUrXWhGuNmlk74ifI."
+  },
+  {
+    "id": "9829f014-0f2b-46b3-8050-fe33dd157d82",
+    "username": "darian",
+    "role": "user",
+    "passwordHash": "$2b$12$YIRneOHJRgkxOnkYOME4hOXE2fqRtcnsSkDnPQEzSPSp.qgezw1Pe"
   }
 ]
