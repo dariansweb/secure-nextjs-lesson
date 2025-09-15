@@ -1,82 +1,339 @@
-import Image from "next/image";
+// app/page.tsx
 import Link from "next/link";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+export const dynamic = "force-dynamic";
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <Link href="/protected">Private Secure Location</Link>
+export default async function HomePage() {
+  const env = process.env.NODE_ENV ?? "development";
+  const isProd = env === "production";
+
+  return (
+    <main className="mx-auto max-w-6xl px-4 py-8 md:py-2">
+      {/* Header card */}
+      <section className="rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        {/* Dev vs Prod strip */}
+        <div
+          className={[
+            "px-5 py-3 text-sm",
+            isProd
+              ? "bg-amber-50 text-amber-900 dark:bg-amber-950/40 dark:text-amber-200"
+              : "bg-emerald-50 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200",
+          ].join(" ")}
+        >
+          {isProd ? (
+            <p>
+              <strong className="font-semibold">Production mode:</strong>{" "}
+              JSON-backed write operations are disabled. “Add user” (Admin) and
+              “Change password” (Account) show read-only hints. All routes are
+              enforced by middleware (JWT + RBAC + ACL) with PRG 303 redirects
+              and CSRF.
+            </p>
+          ) : (
+            <p>
+              <strong className="font-semibold">Development mode:</strong>{" "}
+              JSON-backed writes are enabled for learning. Try “Add user” on{" "}
+              <Link href="/admin" className="underline underline-offset-2">
+                /admin
+              </Link>{" "}
+              and “Change password” on{" "}
+              <Link href="/account" className="underline underline-offset-2">
+                /account
+              </Link>
+              . Security features are live (CSRF double-submit, SameSite
+              cookies, middleware gates).
+            </p>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        {/* Intro */}
+        <div className="px-5 pt-5 text-slate-700 dark:text-slate-300">
+          <p className="text-sm leading-relaxed">
+            A step-by-step, production-shaped walkthrough of building safer auth
+            and access controls with the App Router and Tailwind. The app is
+            intentionally simple, but the edges — cookies, CSRF, middleware, and
+            redirects — are treated like the real world.
+          </p>
+        </div>
+
+        {/* Quick nav */}
+        <div className="px-5 py-5">
+          <div className="space-y-2">
+            <div className="text-sm font-semibold text-slate-900 dark:text-slate-50">
+              Explore
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Link
+                href="/login"
+                className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 active:translate-y-px dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+              >
+                Login
+              </Link>
+              <Link
+                href="/protected"
+                className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 active:translate-y-px dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+              >
+                Protected
+              </Link>
+              <Link
+                href="/admin"
+                className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 active:translate-y-px dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+              >
+                Admin
+              </Link>
+              <Link
+                href="/docs"
+                className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 active:translate-y-px dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+              >
+                Docs
+              </Link>
+              <Link
+                href="/account"
+                className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 active:translate-y-px dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+              >
+                Account
+              </Link>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Sign in first; admins see everything. Users are gated by ACL rules
+              under{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                /docs/*
+              </code>
+              .
+            </p>
+          </div>
+        </div>
+
+        <div className="mx-5 border-t border-slate-200 dark:border-slate-800" />
+
+        {/* What’s implemented */}
+        <section className="px-5 py-6">
+          <h2 className="text-lg font-extrabold text-slate-900 dark:text-slate-50">
+            What’s implemented
+          </h2>
+          <dl className="mt-4 grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-[12rem_1fr]">
+            <dt className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+              Auth model
+            </dt>
+            <dd className="text-sm text-slate-700 dark:text-slate-300">
+              Username + password (bcrypt), users in{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                data/users.json
+              </code>{" "}
+              (dev). Writes disabled in production.
+            </dd>
+
+            <dt className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+              Session
+            </dt>
+            <dd className="text-sm text-slate-700 dark:text-slate-300">
+              Signed JWT (HS256) in host-scoped cookie{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                __Host-session
+              </code>
+              , short expiry, verified in middleware with versioning.
+            </dd>
+
+            <dt className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+              CSRF
+            </dt>
+            <dd className="text-sm text-slate-700 dark:text-slate-300">
+              Double-submit token (
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                __Host-csrf
+              </code>{" "}
+              + hidden field) and{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                SameSite=Lax
+              </code>
+              .
+            </dd>
+
+            <dt className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+              Redirect hygiene
+            </dt>
+            <dd className="text-sm text-slate-700 dark:text-slate-300">
+              PRG flow with <span className="font-semibold">303 See Other</span>{" "}
+              after POSTs (no{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                POST /protected
+              </code>{" "}
+              ghosts).
+            </dd>
+
+            <dt className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+              Access control
+            </dt>
+            <dd className="text-sm text-slate-700 dark:text-slate-300">
+              Middleware gates{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                /protected
+              </code>
+              ,{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                /admin
+              </code>
+              ,{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                /account
+              </code>
+              , and{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                /docs
+              </code>
+              . RBAC via JWT{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                role
+              </code>
+              . Per-directory ACL for{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                /docs/*
+              </code>{" "}
+              (most-specific prefix wins). Dev-only “NO_ACCESS” explainer on the
+              protected page.
+            </dd>
+
+            <dt className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+              Hardening
+            </dt>
+            <dd className="text-sm text-slate-700 dark:text-slate-300">
+              HttpOnly/Secure cookies, strict cache control{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                private, no-store
+              </code>
+              , CSP/HSTS/nosniff/frame-ancestors, origin checks on POSTs, and
+              login rate limiting with jitter.
+            </dd>
+          </dl>
+        </section>
+
+        <div className="mx-5 border-t border-slate-200 dark:border-slate-800" />
+
+        {/* Lessons timeline */}
+        <section className="px-5 py-6">
+          <h2 className="text-lg font-extrabold text-slate-900 dark:text-slate-50">
+            How we got here (lesson timeline)
+          </h2>
+          <ol className="mt-4 space-y-3 text-sm text-slate-700 dark:text-slate-300">
+            <li>
+              <span className="font-semibold">
+                Lesson 1 — Training-wheels login:
+              </span>{" "}
+              fixed insecure flows; added CSRF, SameSite, rate limiting, and 303
+              PRG.
+            </li>
+            <li>
+              <span className="font-semibold">
+                Lesson 2 — Real identity (file-based):
+              </span>{" "}
+              JSON users, bcrypt hashes, JWT cookie with{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                sub / username / role / v
+              </code>
+              ; middleware verification.
+            </li>
+            <li>
+              <span className="font-semibold">
+                Lesson 3 — RBAC + protected routes:
+              </span>{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                /protected
+              </code>{" "}
+              &{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                /admin
+              </code>{" "}
+              gates, clean logout.
+            </li>
+            <li>
+              <span className="font-semibold">Lesson 4 — Directory ACLs:</span>{" "}
+              rule file for{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                /docs/*
+              </code>{" "}
+              and dev-only “why blocked?” panel.
+            </li>
+            <li>
+              <span className="font-semibold">
+                Lesson 5 — Account management:
+              </span>{" "}
+              change password (with confirm) and admin-only “add user.” Writes
+              in dev; read-only in prod.
+            </li>
+          </ol>
+        </section>
+
+        <div className="mx-5 border-t border-slate-200 dark:border-slate-800" />
+
+        {/* Architecture snapshot & next */}
+        <section className="px-5 py-6">
+          <h2 className="text-lg font-extrabold text-slate-900 dark:text-slate-50">
+            Architecture snapshot
+          </h2>
+          <dl className="mt-4 grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-[12rem_1fr]">
+            <dt className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+              Runtime
+            </dt>
+            <dd className="text-sm text-slate-700 dark:text-slate-300">
+              App Router (Next 15), route handlers (no Server Actions), Node
+              runtime for bcrypt.
+            </dd>
+
+            <dt className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+              Perimeter
+            </dt>
+            <dd className="text-sm text-slate-700 dark:text-slate-300">
+              Middleware verifies JWT on every protected request, sets cache
+              headers, and enforces RBAC & ACL.
+            </dd>
+
+            <dt className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+              State
+            </dt>
+            <dd className="text-sm text-slate-700 dark:text-slate-300">
+              Stateless JWT (short-lived). Global rotation via{" "}
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                SESSION_VERSION
+              </code>
+              .
+            </dd>
+          </dl>
+
+          <h2 className="mt-6 text-lg font-extrabold text-slate-900 dark:text-slate-50">
+            What’s next (DB-ready path)
+          </h2>
+          <ul className="mt-3 list-disc space-y-2 pl-6 text-sm text-slate-700 dark:text-slate-300">
+            <li>
+              Swap the JSON repo for a Prisma/Postgres adapter, keeping the same
+              interface (
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                findUserByUsername / findById / createUser / updatePassword
+              </code>
+              ).
+            </li>
+            <li>
+              Keep JWT claims stable (
+              <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                sub / username / role / v
+              </code>
+              ) so middleware remains unchanged.
+            </li>
+            <li>
+              Optional: migrate ACL rules into a table; the helper API stays the
+              same.
+            </li>
+          </ul>
+
+          <div className="mt-6">
+            <Link
+              href="/login"
+              className="inline-flex items-center rounded-lg border border-slate-900 bg-slate-900 px-3.5 py-2 text-sm font-semibold text-white hover:bg-slate-800 active:translate-y-px dark:border-slate-200 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-white"
+            >
+              Start the tour →
+            </Link>
+          </div>
+        </section>
+      </section>
+    </main>
   );
 }

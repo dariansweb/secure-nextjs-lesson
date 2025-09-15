@@ -63,3 +63,27 @@ export async function createUser(
   cache = next; // refresh in-memory cache
   return user;
 }
+
+// lib/users.ts (additions)
+
+export async function findUserById(id: string) {
+  const users = await loadUsers();
+  return users.find((u) => u.id === id) ?? null;
+}
+
+export async function updatePassword(userId: string, newPassword: string) {
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("WRITE_DISABLED"); // filesystem is read-only on Vercel
+  }
+  const users = await loadUsers();
+  const idx = users.findIndex((u) => u.id === userId);
+  if (idx === -1) throw new Error("NOT_FOUND");
+
+  const rounds = parseInt(process.env.BCRYPT_ROUNDS ?? "12", 10);
+  const passwordHash = await bcrypt.hash(newPassword, rounds);
+  const updated = { ...users[idx], passwordHash };
+
+  users[idx] = updated;
+  await fs.writeFile(USERS_JSON_PATH, JSON.stringify(users, null, 2));
+  cache = users; // refresh cache
+}
