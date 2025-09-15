@@ -44,7 +44,34 @@ export default async function HomePage() {
             </p>
           )}
         </div>
-
+        {/* CTA row: Star / View repo */}
+        <div className="flex flex-wrap items-center justify-between gap-3 px-5 pt-5">
+          <p className="text-sm text-slate-700 dark:text-slate-300">
+            Source code available on GitHub — audit, fork, improve the lessons.
+          </p>
+          <div className="flex items-center gap-2">
+            <a
+              href="https://github.com/dariansweb/secure-nextjs-lesson"
+              className="inline-flex items-center rounded-lg border border-slate-900 bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800 active:translate-y-px dark:border-slate-200 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-white"
+            >
+              <svg
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                className="mr-2 h-4 w-4"
+                fill="currentColor"
+              >
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59..." />
+              </svg>
+              View on GitHub
+            </a>
+            <a
+              href="https://github.com/dariansweb/secure-nextjs-lesson/stargazers"
+              className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 active:translate-y-px dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+            >
+              ⭐ Star the repo
+            </a>
+          </div>
+        </div>
         {/* Intro */}
         <div className="px-5 pt-5 text-slate-700 dark:text-slate-300">
           <p className="text-sm leading-relaxed">
