@@ -1,8 +1,16 @@
 # Secure Next.js Training App (TypeScript + Tailwind)
 
+![Next.js](https://img.shields.io/badge/Next.js-15-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue)
+![Tailwind](https://img.shields.io/badge/Tailwind-CSS-38B2AC)
+
+
 A production-shaped, pedagogy-first Next.js (App Router) project that teaches **secure login flows**, **JWT sessions**, **CSRF protection**, **RBAC**, and **per-directory ACLs** — all with **Tailwind** and **TypeScript**. Minimal by design, but the *edges* (cookies, middleware, redirects) are treated seriously so you can learn the right habits.
 
 Built collaboratively by **Dude** and **GPT-5 Thinking** (your friendly “Dudeness” AI mentor). 👋
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/dariansweb/secure-nextjs-lesson)
+
 
 https://nextjs-security-lesson.vercel.app/
 
