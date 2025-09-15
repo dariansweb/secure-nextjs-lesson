@@ -3,24 +3,12 @@
     "id": "u1",
     "username": "admin",
     "role": "admin",
-    "passwordHash": "$2b$12$K03dvC5huGnlPnoPM0ley.v7jHWP2iABcYHU510QaUjHYMKITLBZO"
+    "passwordHash": "$2b$12$IOcczdokD7.WPkYOCU6p0OsKMfayALE1e./EC2yhIObnVh0tYKNKG"
   },
   {
-    "id": "u2",
+    "id": "e6123b29-44e4-4c56-b347-aadc03c3eb8d",
     "username": "reader",
     "role": "user",
-    "passwordHash": "$2b$12$5YgWLfKZ5tKQswhXcdA6vuzEKyApdptlA/OkMFp/F3M2Hwn0w8zh."
-  },
-  {
-    "id": "606f06dd-881b-4a67-9899-a2cb6a6cd205",
-    "username": "alice",
-    "role": "user",
-    "passwordHash": "$2b$12$x/2qHHfWYLGqWe/4rwbgsOrQHgNTwE4wIoHcUrXWhGuNmlk74ifI."
-  },
-  {
-    "id": "9829f014-0f2b-46b3-8050-fe33dd157d82",
-    "username": "darian",
-    "role": "user",
-    "passwordHash": "$2b$12$YIRneOHJRgkxOnkYOME4hOXE2fqRtcnsSkDnPQEzSPSp.qgezw1Pe"
+    "passwordHash": "$2b$12$lIMf24sZv.BTIbIsHuDT0OzoBeJ.Q9GT4BX9o64JQ3h/jcgCr1/Rq"
   }
 ]

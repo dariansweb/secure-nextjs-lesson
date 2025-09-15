@@ -80,6 +80,12 @@ export default async function HomePage() {
             intentionally simple, but the edges — cookies, CSRF, middleware, and
             redirects — are treated like the real world.
           </p>
+          <p>ADMIN - 
+            Username: admin Password: password
+            </p>
+          <p>USER -
+            Username: reader Password: password
+          </p>
         </div>
 
         {/* Quick nav */}
