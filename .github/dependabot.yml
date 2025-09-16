@@ -1,9 +1,41 @@
 version: 2
 updates:
+  # Keep npm deps fresh (Next/React/Tailwind live here)
   - package-ecosystem: "npm"
-    directory: "/"
-    schedule: { interval: "weekly" }
+    directory: "/"                 # your package.json is at the repo root
+    schedule:
+      interval: "weekly"           # or "daily", "monthly"
+      day: "monday"                # optional
+      time: "09:00"                # optional, 24h
+      timezone: "America/Chicago"  # pick yours or omit
     open-pull-requests-limit: 5
+    # Good default: bump ranges in package.json and lockfile
+    versioning-strategy: increase  # use "lockfile-only" to be extra safe at first
+    # Only nudge your direct deps at first; reduces noise
+    allow:
+      - dependency-type: "direct"
+    # Group related upgrades to keep React/Next/Tailwind in sync
+    groups:
+      react-stack:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "next"
+      tailwind-stack:
+        patterns:
+          - "tailwind*"
+          - "postcss*"
+          - "autoprefixer"
+    # Don’t jump major Next.js versions until YOU’RE ready
+    ignore:
+      - dependency-name: "next"
+        update-types: ["version-update:semver-major"]
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  # Keep GitHub Actions runners updated too (CI hygiene)
   - package-ecosystem: "github-actions"
     directory: "/"
-    schedule: { interval: "weekly" }
+    schedule:
+      interval: "weekly"
