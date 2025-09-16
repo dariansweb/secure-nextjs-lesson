@@ -9,8 +9,8 @@
 ![Package Manager](https://img.shields.io/badge/package%20manager-npm%4010.x-CB3837?logo=npm)
 
 <!-- Automation + Security hygiene -->
-[![CI](https://github.com/OWNER/REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/OWNER/REPO/actions/workflows/codeql.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/codeql.yml)
+[![CI](https://github.com/OWNER/REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/dariansweb/nextjs-security-lesson/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/OWNER/REPO/actions/workflows/codeql.yml/badge.svg)](https://github.com/dariansweb/nextjs-security-lesson/actions/workflows/codeql.yml)
 ![Dependabot](https://img.shields.io/badge/Dependabot-enabled-025E8C?logo=dependabot)
 
 <!-- Deploys + Repo signals -->
