@@ -3,16 +3,11 @@
 ![Next.js](https://img.shields.io/badge/Next.js-15-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue)
 ![Tailwind](https://img.shields.io/badge/Tailwind-CSS-38B2AC)
-
-<!-- Runtime + Tooling posture -->
 ![Node Support](https://img.shields.io/badge/node-%3E=18.18%20%3C23-339933?logo=node.js)
 ![Package Manager](https://img.shields.io/badge/package%20manager-npm%4010.x-CB3837?logo=npm)
-
-<!-- Automation + Security hygiene -->
 ![Dependabot](https://img.shields.io/badge/Dependabot-enabled-025E8C?logo=dependabot)
-
-<!-- Deploys + Repo signals -->
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
+
 https://nextjs-security-lesson.vercel.app/
 
 This repo is a pragmatic Next.js 15 + React + TypeScript training ground with a bias for security and maintainability.  Expect strict types, Tailwind for velocity, and guardrails everywhere: least-privilege CI, CodeQL scanning, and curated  Dependabot updates. Each pull request gets a clean install, typecheck, and build; Vercel previews make review tactile. Contributions are welcome—small, focused PRs with clear intent. The goal: a nimble codebase with professional hygiene,  not ceremony for ceremony’s sake.
