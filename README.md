@@ -12,9 +12,7 @@
 ![Dependabot](https://img.shields.io/badge/Dependabot-enabled-025E8C?logo=dependabot)
 
 <!-- Deploys + Repo signals -->
-[![Vercel Deployments](https://img.shields.io/github/deployments/dariansweb/https://github.com/dariansweb/secure-nextjs-lesson/production?label=vercel&logo=vercel)](https://github.com/dariansweb/https://github.com/dariansweb/secure-nextjs-lesson/deployments)
-![Last Commit](https://img.shields.io/github/last-commit/dariansweb/https://github.com/dariansweb/secure-nextjs-lesson)
-[![License](https://img.shields.io/github/license/dariansweb/https://github.com/dariansweb/secure-nextjs-lesson)](LICENSE)
+![Vercel Deployments](https://nextjs-security-lesson.vercel.app/)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
 
 This repo is a pragmatic Next.js 15 + React + TypeScript training ground with a bias for security and maintainability.  Expect strict types, Tailwind for velocity, and guardrails everywhere: least-privilege CI, CodeQL scanning, and curated  Dependabot updates. Each pull request gets a clean install, typecheck, and build; Vercel previews make review tactile. Contributions are welcome—small, focused PRs with clear intent. The goal: a nimble codebase with professional hygiene,  not ceremony for ceremony’s sake.
@@ -28,8 +26,6 @@ Built collaboratively by **Dude** and **GPT-5 Thinking** (your friendly “Duden
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/dariansweb/secure-nextjs-lesson)
 
-
-https://nextjs-security-lesson.vercel.app/
 
 ---
 
