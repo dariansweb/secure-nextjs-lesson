@@ -9,12 +9,7 @@ import { getUserVersion } from "@/lib/userVersion";
 export const runtime = "nodejs"; // bcrypt + most DB clients need Node runtime
 
 const secret = new TextEncoder().encode(
-  process.env.SESSION_SECRET || (() => {
-    if (process.env.NODE_ENV === 'production') {
-      throw new Error('SESSION_SECRET required in production');
-    }
-    return 'dev-secret';
-  })()
+  process.env.SESSION_SECRET ?? "dev-secret"
 );
 const SESSION_VERSION = parseInt(process.env.SESSION_VERSION ?? "1", 10);
 

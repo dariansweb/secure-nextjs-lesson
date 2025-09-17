@@ -4,12 +4,7 @@ import { redirect } from "next/navigation";
 import { jwtVerify } from "jose";
 
 const secret = new TextEncoder().encode(
-  process.env.SESSION_SECRET || (() => {
-    if (process.env.NODE_ENV === 'production') {
-      throw new Error('SESSION_SECRET required in production');
-    }
-    return 'dev-secret';
-  })()
+  process.env.SESSION_SECRET ?? "dev-secret"
 );
 const SESSION_VERSION = parseInt(process.env.SESSION_VERSION ?? "1", 10);
 
