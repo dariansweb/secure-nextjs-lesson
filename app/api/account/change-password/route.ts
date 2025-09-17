@@ -6,7 +6,12 @@ import { findUserById, verifyUserPassword, updatePassword } from "@/lib/users";
 
 export const runtime = "nodejs";
 const secret = new TextEncoder().encode(
-  process.env.SESSION_SECRET ?? "dev-secret"
+  process.env.SESSION_SECRET || (() => {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('SESSION_SECRET required in production');
+    }
+    return 'dev-secret';
+  })()
 );
 const SESSION_VERSION = parseInt(process.env.SESSION_VERSION ?? "1", 10);
 const seeOther = (url: URL) => NextResponse.redirect(url, 303);

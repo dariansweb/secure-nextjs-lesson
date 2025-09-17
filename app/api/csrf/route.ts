@@ -2,17 +2,16 @@
 import { NextResponse } from "next/server";
 import crypto from "node:crypto";
 
-export async function GET(req: Request) {
-  const token = crypto.randomBytes(16).toString("hex");
+export async function GET() {
+  const token = crypto.randomBytes(32).toString("hex");
 
-  const baseUrl = req.url || `${req.headers.get('x-forwarded-proto') || 'http'}://${req.headers.get('host') || 'localhost:3000'}`;
-  const res = NextResponse.redirect(new URL("/login", baseUrl));
+  const res = NextResponse.redirect("/login");
   res.cookies.set("__Host-csrf", token, {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: 600, // 10 minutes
+    maxAge: 600,
   });
 
   return res;

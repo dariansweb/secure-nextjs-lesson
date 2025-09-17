@@ -3,7 +3,12 @@ import { jwtVerify } from "jose";
 import { bumpUserVersion } from "@/lib/userVersion";
 
 const secret = new TextEncoder().encode(
-  process.env.SESSION_SECRET ?? "dev-secret"
+  process.env.SESSION_SECRET || (() => {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('SESSION_SECRET required in production');
+    }
+    return 'dev-secret';
+  })()
 );
 
 export async function POST(req: NextRequest) {
